@@ -7,22 +7,38 @@
     <link rel="stylesheet" href="styles/main_page.css">
     <link rel="stylesheet" href="styles/game_page.css">
     <link rel="stylesheet" href="styles/animations.css">
+    <link rel="stylesheet" href="styles/media_screen.css">
     <script src="scripts/variables.js" defer></script>
     <script src="scripts/rockpaperscissors.js" defer></script>
     <script src="scripts/animations.js" defer></script>
-    <title>Rock Paper Scissors on Console</title>
+    <title>Rock Paper Scissors!</title>
 </head>
 
 <body>
     <div class="container initial-state__main">
         <div class="title">
-            <h1><span style="--duration: 0">R</span><span style="--duration: 1">o</span><span style="--duration: 2">c</span><span style="--duration: 3">k</span><span style="--duration: 4">,</span> <span style="--duration: 5">P</span><span style="--duration: 6">a</span><span style="--duration: 7">p</span><span style="--duration: 8">e</span><span style="--duration: 9">r</span><span style="--duration: 10">,</span> <span style="--duration: 11">S</span><span style="--duration: 12">c</span><span style="--duration: 13">i</span><span style="--duration: 14">s</span><span style="--duration: 15">s</span><span style="--duration: 16">o</span><span style="--duration: 17">r</span><span style="--duration: 18">s</span><span style="--duration: 19">!</span></h1>
+            <h1>
+                <div>
+                    <span style="--duration: 0">R</span><span style="--duration: 1">o</span><span
+                        style="--duration: 2">c</span><span style="--duration: 3">k</span><span
+                        style="--duration: 4">,</span>
+                </div>
+                <div><span style="--duration: 5">P</span><span style="--duration: 6">a</span><span
+                        style="--duration: 7">p</span><span style="--duration: 8">e</span><span
+                        style="--duration: 9">r</span><span style="--duration: 10">,</span></div>
+                <div><span style="--duration: 11">S</span><span style="--duration: 12">c</span><span
+                        style="--duration: 13">i</span><span style="--duration: 14">s</span><span
+                        style="--duration: 15">s</span><span style="--duration: 16">o</span><span
+                        style="--duration: 17">r</span><span style="--duration: 18">s</span><span
+                        style="--duration: 19">!</span>
+                </div>
+            </h1>
         </div>
         <div class="button-container">
             <button id="start">Start Game</button>
         </div>
     </div>
-    <div class="game-container initial-scale">
+    <div class="game-container initial-state">
         <div class="exit-container">
             <svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
                 <defs>
@@ -128,6 +144,14 @@
                     </svg>
                 </div>
             </div>
+        </div>
+    </div>
+    <div class="win-wrapper">
+        <div class="win-container">
+            <h1 class="win-text" id="winner">`Winner` Wins!</h1>
+            <p id="winner-choice">`Winner` chose: `choice`</p>
+            <p class="loser-text" id="loser">`Opponent` chose: `choice`</p>
+            <button id="continue-round">Next Round!</button>
         </div>
     </div>
 </body>

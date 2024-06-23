@@ -1,37 +1,93 @@
 function getComputerChoice() {
-  let computerChoice = Math.round(Math.random() * 2);
-  
-  switch (computerChoice) {
-    case 0: return `rock`;
-    case 1: return `paper`;
-    case 2: return `scissors`
+  let computerChoiceChoice = Math.round(Math.random() * 2);
+
+  switch (computerChoiceChoice) {
+    case 0:
+      return `rock`;
+    case 1:
+      return `paper`;
+    case 2:
+      return `scissors`;
   }
 }
 
-function playGame(humanChoice) {
-  let player = humanChoice;
-  let computer = getComputerChoice();
+function showWinner(winner, loser, winnerChoice, loserChoice, isTie = false) {
+  let text_winner = win_wrapper.querySelector(`#winner`);
+  let text_loser = win_wrapper.querySelector(`#loser`);
+  let choice_winner = win_wrapper.querySelector(`#winner-choice`);
+  let btn_continue = win_wrapper.querySelector(`button`);
 
-  if (player === computer) {
-    console.log(`Player: ${player} || Computer ${computer}\nIt's a tie!`);
-  } else if (player === `rock` && computer === `scissors` || player === `scissors` && computer === `paper` || player === `paper` && computer === `rock`) {
-    console.log(`Player: ${player} || Computer ${computer}\nPlayer Wins!`);
+  if (humanScore === 5 || computerScore === 5) {
+    text_winner.textContent = `${winner} wins!`;
+    btn_continue.textContent = `Congratulations!`;
+    humanScore = 0,
+    computerScore = 0;
+    btn_continue.addEventListener(`click`, () => {
+      win_wrapper.classList.remove(`active`);
+      btn_continue.textContent = `Next Round!`;
+      game_container.classList.remove(`load-game`);
+      game_container.classList.add(`initial-state`);
+      scores.forEach((score) => {
+        score.textContent = `0`;
+      });
+      main_page.classList.remove(`start`);
+      main_page.classList.add(`restart`);
+    });
+    win_wrapper.classList.add(`active`);
+
+    return;
+  }
+
+  if (isTie) {
+    text_winner.textContent = `It's a tie!`;
+  } else {
+    text_winner.textContent = `${winner} wins!`;
+  }
+
+  choice_winner.textContent = `${winner} chose: ${winnerChoice}`;
+  text_loser.textContent = `${loser} chose: ${loserChoice}`;
+  btn_continue.addEventListener(`click`, () => {
+    win_wrapper.classList.remove(`active`);
+  });
+
+  win_wrapper.classList.add(`active`);
+}
+
+function playGame(humanChoice) {
+  let playerChoice = humanChoice;
+  let computerChoice = getComputerChoice();
+
+  if (playerChoice === computerChoice) {
+    console.log(
+      `Player: ${playerChoice} || Computer ${computerChoice}\nIt's a tie!`
+    );
+    showWinner(`Player`, `Computer`, playerChoice, computerChoice, true);
+  } else if (
+    (playerChoice === `rock` && computerChoice === `scissors`) ||
+    (playerChoice === `scissors` && computerChoice === `paper`) ||
+    (playerChoice === `paper` && computerChoice === `rock`)
+  ) {
+    console.log(
+      `Player: ${playerChoice} || Computer ${computerChoice}\nPlayer Wins!`
+    );
     humanScore++;
     scores.forEach((score) => {
-      if (score.id === 'player') {
-        console.log('HUMAN');
+      if (score.id === "player") {
         score.textContent = humanScore;
       }
     });
+    showWinner(`Player`, `Computer`, playerChoice, computerChoice);
   } else {
-    console.log(`Player: ${player} || Computer ${computer}\nComputer Wins!`);
+    console.log(
+      `PlayerChoice: ${playerChoice} || ComputerChoice ${computerChoice}\nComputerChoice Wins!`
+    );
     computerScore++;
     scores.forEach((score) => {
-      if (score.id === 'computer') {
-        console.log('COMPUTER');
+      if (score.id === "computer") {
         score.textContent = computerScore;
       }
     });
+    showWinner(`Computer`, `Player`, computerChoice, playerChoice);
   }
 }
 
